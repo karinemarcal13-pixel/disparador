@@ -1,98 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leads | Studio Karine</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leads | Studio Karine</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <header class="topo">
-        <div>
-            <span class="subtitulo">STUDIO KARINE</span>
-            <h1>Leads & WhatsApp</h1>
-            <p>Organize seus contatos e envie suas ofertas.</p>
-        </div>
-        <div class="icone-topo">♡</div>
-    </header>
+<header class="topo">
+  <div><span class="subtitulo">STUDIO KARINE</span><h1>Leads & WhatsApp</h1><p>Organize seus contatos e sua fila de atendimento.</p></div>
+  <div class="icone-topo">♡</div>
+</header>
 
-    <section class="cards">
-        <div class="card"><span>Total de leads</span><strong id="totalLeads">0</strong></div>
-        <div class="card"><span>Contatados</span><strong id="totalContatados">0</strong></div>
-        <div class="card"><span>Responderam</span><strong id="totalResponderam">0</strong></div>
-        <div class="card"><span>Agendaram</span><strong id="totalAgendaram">0</strong></div>
-    </section>
+<section class="cards">
+  <div class="card"><span>Total de leads</span><strong id="totalLeads">0</strong></div>
+  <div class="card"><span>Contatados</span><strong id="totalContatados">0</strong></div>
+  <div class="card"><span>Responderam</span><strong id="totalResponderam">0</strong></div>
+  <div class="card"><span>Agendaram</span><strong id="totalAgendaram">0</strong></div>
+</section>
 
-    <section class="painel">
-        <div class="titulo-painel">
-            <h2>Novo lead</h2>
-            <p>Cadastre uma pessoa para entrar em contato.</p>
-        </div>
-
-        <form id="formLead">
-            <div class="campos">
-                <div class="campo">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" placeholder="Ex.: Ana" required>
-                </div>
-                <div class="campo">
-                    <label for="telefone">WhatsApp</label>
-                    <input type="tel" id="telefone" placeholder="Ex.: 43999999999" required>
-                </div>
-            </div>
-
-            <div class="campo">
-                <label for="oferta">Oferta / mensagem</label>
-                <textarea id="oferta" rows="5" required>Oi, {nome}! Tudo bem? 🤍
+<section class="painel">
+  <h2>Novo lead</h2><p>Cadastre uma pessoa para entrar em contato.</p>
+  <form id="formLead">
+    <div class="campos">
+      <div class="campo"><label>Nome</label><input id="nome" required placeholder="Ex.: Ana"></div>
+      <div class="campo"><label>WhatsApp</label><input id="telefone" required placeholder="Ex.: 43999999999"></div>
+    </div>
+    <div class="campo"><label>Oferta / mensagem</label>
+      <textarea id="oferta" rows="5" required>Oi, {nome}! Tudo bem? 🤍
 
 Sou a Karine, do Studio. Estou com alguns horários disponíveis para novas clientes este mês e queria te apresentar meu trabalho.
 
 Se tiver interesse, posso te passar os horários disponíveis. ✨</textarea>
-                <small>Use <strong>{nome}</strong> para colocar automaticamente o nome da cliente.</small>
-            </div>
-
-            <button type="submit" class="btn-principal">+ Adicionar lead</button>
-        </form>
-    </section>
-
-    <section class="painel">
-        <div class="cabecalho-lista">
-            <div>
-                <h2>Meus leads</h2>
-                <p>Gerencie seus contatos.</p>
-            </div>
-            <div class="filtros">
-                <input type="text" id="pesquisa" placeholder="🔎 Procurar...">
-                <select id="filtroStatus">
-                    <option value="todos">Todos</option>
-                    <option value="novo">Novo</option>
-                    <option value="contatado">Contatado</option>
-                    <option value="respondeu">Respondeu</option>
-                    <option value="agendou">Agendou</option>
-                </select>
-            </div>
-        </div>
-
-        <div id="listaLeads" class="lista-leads"></div>
-
-        <div id="mensagemVazia" class="vazio">
-            <div class="vazio-icone">♡</div>
-            <h3>Nenhum lead cadastrado</h3>
-            <p>Adicione seu primeiro lead acima.</p>
-        </div>
-    </section>
-</div>
-
-<div id="modal" class="modal">
-    <div class="modal-conteudo">
-        <button class="fechar" onclick="fecharModal()">×</button>
-        <h2>Mensagem para WhatsApp</h2>
-        <p id="nomeModal"></p>
-        <textarea id="mensagemModal"></textarea>
-        <button id="btnWhatsApp" class="btn-whatsapp">💬 Abrir WhatsApp</button>
+      <small>Use <b>{nome}</b> para personalizar automaticamente.</small>
     </div>
+    <button class="btn-principal">+ Adicionar lead</button>
+  </form>
+</section>
+
+<section class="painel">
+  <div class="cabecalho-lista">
+    <div><h2>Meus leads</h2><p>Selecione vários contatos para criar uma fila.</p></div>
+    <div class="filtros"><input id="pesquisa" placeholder="🔎 Procurar..."><select id="filtroStatus">
+      <option value="todos">Todos</option><option value="novo">Novo</option><option value="contatado">Contatado</option><option value="respondeu">Respondeu</option><option value="agendou">Agendou</option>
+    </select></div>
+  </div>
+
+  <div class="barra-selecao">
+    <label class="check-todos"><input type="checkbox" id="selecionarTodos"> Selecionar todos os exibidos</label>
+    <span id="contadorSelecionados">0 selecionados</span>
+    <button id="btnFila" class="btn-fila" disabled>💬 Iniciar fila de envio</button>
+  </div>
+
+  <div id="listaLeads" class="lista-leads"></div>
+  <div id="mensagemVazia" class="vazio"><div class="vazio-icone">♡</div><h3>Nenhum lead cadastrado</h3><p>Adicione seu primeiro lead acima.</p></div>
+</section>
 </div>
+
+<div id="modal" class="modal"><div class="modal-conteudo">
+<button class="fechar" onclick="fecharModal()">×</button>
+<h2>Mensagem para WhatsApp</h2><p id="nomeModal"></p>
+<textarea id="mensagemModal"></textarea>
+<button id="btnWhatsApp" class="btn-whatsapp">💬 Abrir WhatsApp</button>
+</div></div>
+
+<div id="filaModal" class="modal"><div class="modal-conteudo">
+<button class="fechar" onclick="fecharFila()">×</button>
+<h2>Fila de envio</h2><p id="filaInfo"></p>
+<div id="filaLeadAtual" class="fila-atual"></div>
+<div class="fila-acoes">
+<button id="btnFilaWhatsApp" class="btn-whatsapp">💬 Abrir WhatsApp deste lead</button>
+<button id="btnProximo" class="btn-principal">Próximo lead →</button>
+</div>
+<small>O WhatsApp é aberto com a mensagem pronta. O envio da mensagem é confirmado por você.</small>
+</div></div>
 
 <script src="script.js"></script>
 </body>
